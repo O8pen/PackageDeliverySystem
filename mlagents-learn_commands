@@ -1,0 +1,21 @@
+mlagents-learn config/ppo/PDPrototip.yaml --run-id=2022_0309_1601
+mlagents-learn --help
+mlagents-learn config/ppo/PDPrototip.yaml --env=Builds/PDPrototip --num-envs=4 --run-id=2022_0309_1625
+
+mlagents-learn config/ppo/PDPrototip.yaml --env=Builds/PDPrototip --no-graphics --run-id=2022_0309_1649
+
+mlagents-learn config/ppo/Hallway.yaml --run-id=2022_0309_
+tensorboard --logdir results --port 6006
+
+//////////////////////////////////////
+
+
+
+mlagents-learn config/ppo/CrawlerStaticFight.yaml --run-id=2022_0313_15
+tensorboard --logdir results --port 6006
+
+
+mlagents-learn config/ppo/CrawlerStaticFight.yaml --run-id=2022_0313_20
+tensorboard --logdir results --port 6006
+
+mlagents-learn config/ppo/CrawlerStaticFight.yaml --initialize-from=2022_0313_2151 --run-id=2022_0313_22

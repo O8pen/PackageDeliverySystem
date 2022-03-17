@@ -1,0 +1,36 @@
+{
+    "Fight": {
+        "checkpoints": [
+            {
+                "steps": 499953,
+                "file_path": "results\\2022_0313_1627\\Fight\\Fight-499953.onnx",
+                "reward": 0.00585264681528012,
+                "creation_time": 1647178768.2346914
+            },
+            {
+                "steps": 999996,
+                "file_path": "results\\2022_0313_1627\\Fight\\Fight-999996.onnx",
+                "reward": -0.5607400367152877,
+                "creation_time": 1647179383.6349459
+            },
+            {
+                "steps": 1085909,
+                "file_path": "results\\2022_0313_1627\\Fight\\Fight-1085909.onnx",
+                "reward": 0.36996080889366567,
+                "creation_time": 1647179486.0486205
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1085909,
+            "file_path": "results\\2022_0313_1627\\Fight.onnx",
+            "reward": 0.36996080889366567,
+            "creation_time": 1647179486.0486205
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.23.0",
+        "torch_version": "1.7.0+cu110",
+        "tensorflow_version": -1
+    }
+}

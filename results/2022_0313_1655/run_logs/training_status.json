@@ -1,0 +1,48 @@
+{
+    "Fight": {
+        "checkpoints": [
+            {
+                "steps": 499624,
+                "file_path": "results\\2022_0313_1655\\Fight\\Fight-499624.onnx",
+                "reward": 0.590236209332943,
+                "creation_time": 1647180361.8757644
+            },
+            {
+                "steps": 999435,
+                "file_path": "results\\2022_0313_1655\\Fight\\Fight-999435.onnx",
+                "reward": 0.8371569255123967,
+                "creation_time": 1647180955.583732
+            },
+            {
+                "steps": 1499941,
+                "file_path": "results\\2022_0313_1655\\Fight\\Fight-1499941.onnx",
+                "reward": 0.8090111639569787,
+                "creation_time": 1647181547.1597168
+            },
+            {
+                "steps": 1999915,
+                "file_path": "results\\2022_0313_1655\\Fight\\Fight-1999915.onnx",
+                "reward": 0.7790551460706271,
+                "creation_time": 1647182145.1002197
+            },
+            {
+                "steps": 2497628,
+                "file_path": "results\\2022_0313_1655\\Fight\\Fight-2497628.onnx",
+                "reward": null,
+                "creation_time": 1647182743.3988426
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2497628,
+            "file_path": "results\\2022_0313_1655\\Fight.onnx",
+            "reward": null,
+            "creation_time": 1647182743.3988426
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.23.0",
+        "torch_version": "1.7.0+cu110",
+        "tensorflow_version": -1
+    }
+}

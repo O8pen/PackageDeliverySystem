@@ -1,0 +1,2 @@
+# If maxstep is reached add -1 reward
+# foodcollector yaml kullan
