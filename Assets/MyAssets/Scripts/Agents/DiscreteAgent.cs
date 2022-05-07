@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -28,7 +29,13 @@ public class DiscreteAgent : Agent
     public float angle = 0f;
     public Transform[] DestinationTransforms;
 
+    public bool training = false;
+
     public int DestinationQueue = 0;
+    public Queue<string> DestinationQueueQ = new Queue<string>();
+    public Text DestinationQueueText;
+    public GameObject Goal_go;
+    public GameObject ThePackage_go;
     public Transform rigTransform;
     public Transform goalTransform;
     public ArticulationBody Dummy_Artic;
@@ -44,6 +51,105 @@ public class DiscreteAgent : Agent
     protected string m_BehaviorName;
     protected MBaske.DecisionRequester m_Requester;
     protected bool IsActive => m_Requester.Active;
+
+    void Start()
+    {
+        if (training == false)
+        {
+            DestinationTransforms[0].gameObject.SetActive(true);
+            DestinationTransforms[1].gameObject.SetActive(true);
+            DestinationTransforms[2].gameObject.SetActive(true);
+            DestinationTransforms[3].gameObject.SetActive(true);
+            DestinationTransforms[4].gameObject.SetActive(true);
+
+            Goal_go.SetActive(false);
+
+            DestinationQueueQ.Enqueue("A");
+            DestinationQueueText.text = Queue_To_Array(DestinationQueueQ);
+        }
+        else
+        {
+            DestinationTransforms[0].gameObject.SetActive(false);
+            DestinationTransforms[1].gameObject.SetActive(false);
+            DestinationTransforms[2].gameObject.SetActive(false);
+            DestinationTransforms[3].gameObject.SetActive(false);
+            DestinationTransforms[4].gameObject.SetActive(false);
+
+            Goal_go.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+        if (training == false)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                DestinationQueueQ.Enqueue("A");
+                DestinationQueueText.text = Queue_To_Array(DestinationQueueQ);
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                DestinationQueueQ.Enqueue("B");
+                DestinationQueueText.text = Queue_To_Array(DestinationQueueQ);
+            }
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                DestinationQueueQ.Enqueue("C");
+                DestinationQueueText.text = Queue_To_Array(DestinationQueueQ);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Debug.Log("Peek: " + DestinationQueueQ.Peek());
+                Debug.Log("Total elements: " + DestinationQueueQ.Count);
+            }
+
+            if (DestinationQueueQ.Count == 0)
+            {
+                goalTransform = DestinationTransforms[4];
+            }
+            else
+            {
+                if (ThePackage_go.activeInHierarchy == false)
+                {
+                    goalTransform = DestinationTransforms[0];
+                }
+                else
+                {
+                    if (DestinationQueueQ.Peek() == "A")
+                    {
+                        goalTransform = DestinationTransforms[1];
+                    }
+                    else if (DestinationQueueQ.Peek() == "B")
+                    {
+                        goalTransform = DestinationTransforms[2];
+                    }
+                    else if (DestinationQueueQ.Peek() == "C")
+                    {
+                        goalTransform = DestinationTransforms[3];
+                    }
+                }
+            }
+        }
+        else
+        {
+            goalTransform = Goal_go.transform;
+        }
+    }
+
+    public string Queue_To_Array(Queue<string> strQ)
+    {
+        string[] strQ_to_array = strQ.ToArray();
+        string output_str = "Package Queue : ";
+
+        for (int i = 0; i < strQ_to_array.Length; i++)
+        {
+            output_str = output_str + strQ_to_array[i];
+            // Debug.Log(strQ_to_array[i]);
+        }
+
+        return output_str;
+    }
 
     public override void Initialize()
     {
@@ -73,7 +179,7 @@ public class DiscreteAgent : Agent
         // rigTransform.localPosition = new Vector3(Random.Range(0f, +4f), 0, Random.Range(-3f, 3f));
 
         // For 
-        // goalTransform.localPosition = new Vector3(Random.Range(-7.75f, 7.75f), 0, Random.Range(-7.75f, 7.75f));
+        Goal_go.transform.localPosition = new Vector3(Random.Range(-7.75f, 7.75f), 0, Random.Range(-7.75f, 7.75f));
 
         Dummy_Artic.TeleportRoot(new Vector3(Random.Range(-7.75f, 6f) + TrainingAreaTransform.position.x, 0.25f + TrainingAreaTransform.position.y, Random.Range(-7.75f, 7.75f) + TrainingAreaTransform.position.z), Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f)));
 

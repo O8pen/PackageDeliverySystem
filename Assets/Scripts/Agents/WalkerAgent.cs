@@ -7,6 +7,7 @@ namespace MBaske
 {
     public abstract class WalkerAgent : ActivatableAgent, IControllableWalker
     {
+        public DiscreteAgent myAgent;
         public Transform TrainingAreaTransform;
         public ArticulationBody m_ArtBody;
         public Matrix4x4 Matrix => Matrix4x4.TRS(m_Body.WorldPosition, m_Body.AvgWorldRotationXZ, Vector3.one);
@@ -101,9 +102,14 @@ namespace MBaske
 
             // m_Body.ManagedReset(m_Activation == Activation.ImmediatelyRotate, new Vector3(Random.Range(-3f, +3f) + TrainingAreaTransform.position.x, 0.25f + TrainingAreaTransform.position.y, Random.Range(-3f, 3f) + TrainingAreaTransform.position.z));
 
-            // m_Body.ManagedReset(true, new Vector3(Random.Range(-7.75f, +7.75f) + TrainingAreaTransform.position.x, 0.25f + TrainingAreaTransform.position.y, Random.Range(-7.75f, 7.75f) + TrainingAreaTransform.position.z));
-
-            m_Body.ManagedReset(true, TrainingAreaTransform.position);
+            if (myAgent.training == true)
+            {
+                m_Body.ManagedReset(true, new Vector3(Random.Range(-7.75f, +7.75f) + TrainingAreaTransform.position.x, 0.25f + TrainingAreaTransform.position.y, Random.Range(-7.75f, 7.75f) + TrainingAreaTransform.position.z), myAgent.training);
+            }
+            else
+            {
+                m_Body.ManagedReset(true, TrainingAreaTransform.position, myAgent.training);
+            }
 
             m_ArtBody.immovable = false;
 

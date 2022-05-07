@@ -52,7 +52,7 @@ namespace MBaske
             m_HeightBuffer = new float[m_BufferSize];
         }
 
-        public void ManagedReset(bool randomizeRotation = false, Vector3 position = default)
+        public void ManagedReset(bool randomizeRotation = false, Vector3 position = default, bool training = false)
         {
             AvgWorldForwardXZ = m_DefFwd;
             AvgWorldRotationXZ = m_DefRot;
@@ -72,10 +72,20 @@ namespace MBaske
             //     randomizeRotation ? Quaternion.LookRotation(Random.onUnitSphere, Random.onUnitSphere) : m_DefRot
             // );
 
-            m_Body.TeleportRoot(
-                position.Equals(default) ? m_DefPos : position,
-                randomizeRotation ? Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f)) : m_DefRot
-            );
+            if (training == true)
+            {
+                m_Body.TeleportRoot(
+                    position.Equals(default) ? m_DefPos : position,
+                    randomizeRotation ? Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f)) : m_DefRot
+                );
+            }
+            else
+            {
+                m_Body.TeleportRoot(
+                    position.Equals(default) ? m_DefPos : position,
+                    randomizeRotation ? Quaternion.Euler(new Vector3(0f, Random.Range(0f, 0f), 0f)) : m_DefRot
+                );
+            }
 
             if (!randomizeRotation)
             {
