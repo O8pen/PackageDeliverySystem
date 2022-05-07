@@ -9,7 +9,7 @@
 -   **Project Github:** Projeyi indirmek icin asagidaki komut cmd'de calistirilir.
 
     ```sh
-    git clone
+    git clone https://github.com/O8pen/PackageDeliverySystem
     ```
 
 -   **Unity ML-Agents Toolkit : release_12** (`ml-agents-release_12` reposunun [release_12/README.md](https://github.com/Unity-Technologies/ml-agents/tree/release_12_branch) dosyasina buradan ulasilabilir.
